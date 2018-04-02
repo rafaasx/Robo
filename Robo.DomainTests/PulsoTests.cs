@@ -30,7 +30,7 @@ namespace Robo.Domain.Tests
       }
       catch (Exception e)
       {
-        Exception expected = new Exception("O braço não está totalmente contraído.");
+        Exception expected = new Exception("O cotovelo não está totalmente contraído.");
         Assert.AreEqual(expected.Message, e.Message);
       }
 

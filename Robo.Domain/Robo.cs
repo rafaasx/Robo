@@ -12,16 +12,16 @@ namespace Robo.Domain
   {
     private Braco _bracoDireito;
     private Braco _bracoEsquerdo;
-    private Cabeca _cabecao;
+    private Cabeca _cabeca;
     public Robo()
     {
       BracoDireito = new Braco(EnumLado.Direito);
       BracoEsquerdo = new Braco(EnumLado.Esquerdo);
-      Cabecao = new Cabeca();
+      Cabeca = new Cabeca();
     }
 
     public Braco BracoDireito { get => _bracoDireito; set => _bracoDireito = value; }
     public Braco BracoEsquerdo { get => _bracoEsquerdo; set => _bracoEsquerdo = value; }
-    public Cabeca Cabecao { get => _cabecao; set => _cabecao = value; }
+    public Cabeca Cabeca { get => _cabeca; set => _cabeca = value; }
   }
 }

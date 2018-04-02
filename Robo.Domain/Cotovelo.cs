@@ -13,14 +13,14 @@ namespace Robo.Domain
   {
     public Cotovelo()
     {
-      _contracao = EnumContracao.EmRepouso;
+      Contracao = EnumContracao.EmRepouso;
     }
     public void Contrair(EnumContracao contracao)
     {
       if (ValidarProgressaoMovimento(contracao))
       {
         Debug.WriteLine("Contraindo de " + Contracao.ToString() + " para " + contracao.ToString());
-        _contracao = contracao;
+        Contracao = contracao;
       }
     }
 

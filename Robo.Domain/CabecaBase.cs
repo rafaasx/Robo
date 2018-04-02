@@ -10,11 +10,11 @@ namespace Robo.Domain
 {
   public class CabecaBase
   {
-    public string Name { get; set; }
-    internal EnumRotacao _rotacao;
-    internal EnumInclinacao _inclinacao;
+    public string Nome { get; set; }
+    private EnumRotacao rotacao;
+    private EnumInclinacao inclinacao;
 
-    public EnumRotacao Rotacao { get => _rotacao; }
-    public EnumInclinacao Inclinacao { get => _inclinacao; }
+    public EnumInclinacao Inclinacao { get => inclinacao; set => inclinacao = value; }
+    public EnumRotacao Rotacao { get => rotacao; set => rotacao = value; }
   }
 }

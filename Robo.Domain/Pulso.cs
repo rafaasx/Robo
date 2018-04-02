@@ -13,7 +13,7 @@ namespace Robo.Domain
   {
     public Pulso(Braco braco) : base(braco)
     {
-      _rotacao = EnumRotacao.EmRepouso;
+      Rotacao = EnumRotacao.EmRepouso;
     }
 
     public void Rotacionar(EnumRotacao rotacao)
@@ -21,14 +21,14 @@ namespace Robo.Domain
       if (ValidarMovimento(this.Braco.Cotovelo.Contracao, rotacao))
       {
         Debug.WriteLine("Rotacionando de " + Rotacao.ToString() + " para " + rotacao.ToString());
-        _rotacao = rotacao;
+        Rotacao = rotacao;
       }
     }
 
     private bool ValidarMovimento(EnumContracao contracao, EnumRotacao rotacao)
     {
       if (contracao != EnumContracao.FortementeContraido)
-        throw new Exception("O braço não está totalmente contraído.");
+        throw new Exception("O cotovelo não está totalmente contraído.");
       return ValidarRotacao(rotacao);
     }
 

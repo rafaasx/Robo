@@ -3,7 +3,7 @@ using Robo.Domain.Interface;
 
 namespace Robo.Domain
 {
-  public class Braco : BracoBase, IBraco, IMembro
+  public class Braco : BracoBase, IBraco
   {
     private EnumLado _lado;
     private Cotovelo _cotovelo;

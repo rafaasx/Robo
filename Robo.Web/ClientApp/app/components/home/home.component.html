@@ -1,0 +1,94 @@
+<div class="row text-center">
+    <div class="form-group">
+        <label class="control-label" for="form-group-input">{{robo.Nome}}</label>
+    </div>
+</div>
+
+<div class="row text-center">
+    <div class="form-group">
+        <label class="control-label" for="form-group-input">{{robo.Cabeca.Nome}}</label>
+    </div>
+    <div class="form-group col-md-12">
+        <label class="control-label col-md-2 col-md-offset-2" for="form-group-input">Inclinacao: {{Inclinacao[robo.Cabeca.Inclinacao]}}</label>
+        <div class="col-md-2">
+            <select class="form-control" [(ngModel)]="SelectedInclinacao">
+                <option *ngFor="let key of optionsInclinacao" [value]="key" [label]="Inclinacao[key]"></option>
+            </select>
+
+        </div>
+        <div class="col-md-1">
+            <button type="button" class="btn btn-primary" (click)="inclinarCabeca()">Inclinar</button>
+        </div>
+    </div>
+    <div class="form-group col-md-12">
+        <label class="control-label col-md-2 col-md-offset-2" for="form-group-input">Rotacao: {{Rotacao[robo.Cabeca.Rotacao]}}</label>
+        <div class="col-md-2">
+            <select class="form-control" [(ngModel)]="SelectedRotacaoCabeca">
+                <option *ngFor="let key of optionsRotacao" [value]="key" [label]="Rotacao[key]"></option>
+            </select>
+        </div>
+        <div class="col-md-1">
+            <button type="button" class="btn btn-primary">Rotacionar</button>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<div class="row">
+    <div class="col-md-6 text-right">
+        <div class="form-group">
+            <label class="control-label col-md-12 text-center" for="form-group-input">Braco: {{Lado[robo.BracoEsquerdo.Lado]}}</label>
+            <label class="control-label col-md-6" for="form-group-input">Cotovelo: {{Contracao[robo.BracoEsquerdo.Cotovelo.Contracao]}}</label>
+            <div class="col-md-3">
+                <select class="form-control" [(ngModel)]="SelectedContracaoEsquerdo">
+                    <option *ngFor="let key of optionsContracao" [value]="key" [label]="Contracao[key]"></option>
+                </select>
+            </div>
+            <div class="col-md-3 text-left">
+                <button type="button" class="btn btn-primary">Contrair</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-6" for="form-group-input">Pulso: {{Rotacao[robo.BracoEsquerdo.Pulso.Rotacao]}}</label>
+            <div class="col-md-3">
+                <select class="form-control" [(ngModel)]="SelectedRotacaoPulsoEsquerdo">
+                    <option *ngFor="let key of optionsRotacao" [value]="key" [label]="Rotacao[key]"></option>
+                </select>
+            </div>
+            <div class="col-md-3 text-left">
+                <button type="button" class="btn btn-primary">Rotacionar</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 text-right">
+        <div class="form-group">
+            <label class="control-label col-md-12 text-center" for="form-group-input">Braco: {{Lado[robo.BracoDireito.Lado]}}</label>
+            <label class="control-label col-md-6" for="form-group-input">Cotovelo: {{Contracao[robo.BracoDireito.Cotovelo.Contracao]}}</label>
+            <div class="col-md-3">
+                <select class="form-control" [(ngModel)]="SelectedContracaoDireito">
+                    <option *ngFor="let key of optionsContracao" [value]="key" [label]="Contracao[key]"></option>
+                </select>
+            </div>
+            <div class="col-md-3 text-left">
+                <button type="button" class="btn btn-primary">Contrair</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-6" for="form-group-input">Pulso: {{Rotacao[robo.BracoDireito.Pulso.Rotacao]}}</label>
+            <div class="col-md-3">
+                <select class="form-control" [(ngModel)]="SelectedRotacaoPulsoDireito">
+                    <option *ngFor="let key of optionsRotacao" [value]="key" [label]="Rotacao[key]"></option>
+                </select>
+            </div>
+            <div class="col-md-3 text-left">
+                <button type="button" class="btn btn-primary">Rotacionar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+{{robo | json}}

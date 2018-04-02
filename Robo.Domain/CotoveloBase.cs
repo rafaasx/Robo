@@ -10,8 +10,8 @@ namespace Robo.Domain
 {
   public abstract class CotoveloBase
   {
-    internal EnumContracao _contracao;
+    private EnumContracao contracao;
 
-    public EnumContracao Contracao { get => _contracao; }
+    public EnumContracao Contracao { get => contracao; set => contracao = value; }
   }
 }

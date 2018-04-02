@@ -5,6 +5,6 @@ namespace Robo.Domain
 {
   public abstract class BracoBase
   {
-    public string Name { get; set; }
+    public string Nome { get; set; }
   }
 }

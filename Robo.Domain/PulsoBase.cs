@@ -15,8 +15,8 @@ namespace Robo.Domain
       _braco = braco;
     }
     private Braco _braco;
-    internal EnumRotacao _rotacao;
-    public EnumRotacao Rotacao { get => _rotacao; }
+    private EnumRotacao rotacao;
     public Braco Braco { get => _braco; set => _braco = value; }
+    public EnumRotacao Rotacao { get => rotacao; set => rotacao = value; }
   }
 }

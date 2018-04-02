@@ -5,19 +5,19 @@ using System.Diagnostics;
 
 namespace Robo.Domain
 {
-  public class Cabeca : CabecaBase, ICabeca, IMembro
+  public class Cabeca : CabecaBase, ICabeca
   {
     public Cabeca()
     {
-      _rotacao = EnumRotacao.EmRepouso;
-      _inclinacao = EnumInclinacao.EmRepouso;
+      Rotacao = EnumRotacao.EmRepouso;
+      Inclinacao = EnumInclinacao.EmRepouso;
     }
     public void Inclinar(EnumInclinacao inclinacao)
     {
       if (ValidarInclinacao(inclinacao))
       {
         Debug.WriteLine("Inclinando de " + Inclinacao.ToString() + " para " + inclinacao.ToString());
-        _inclinacao = inclinacao;
+        Inclinacao = inclinacao;
       }
     }
 
@@ -33,7 +33,7 @@ namespace Robo.Domain
       if (ValidarMovimento(rotacao))
       {
         Debug.WriteLine("Rotacionando de " + Rotacao.ToString() + " para " + rotacao.ToString());
-        _rotacao = rotacao;
+        Rotacao = rotacao;
       }
     }
 
