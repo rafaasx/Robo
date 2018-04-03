@@ -11,7 +11,7 @@ import { Inclinacao, Lado, Rotacao, Contracao } from '../dto/enum';
 
 @Injectable()
 export class RoboService {
-    private _apiURL: string = "http://localhost/RoboWebAPI/api/Robo";
+    private _apiURL: string = "http://localhost:65303/api/Robo";
     private httpOptions = {
         headers: new Headers({
             'Content-Type': 'application/json'
@@ -43,7 +43,7 @@ export class RoboService {
 
     getRobo(): Observable<Robo> {
         return this.http.get(this._apiURL)
-            .map((res: Response) => <Robo>res.json())
-            .catch((error: any) => Observable.throw(JSON.stringify(error.json()) + '.Server error.'));
+            .map((res: Response) => <Robo>res.json());
+            //.catch((error: any) => Observable.throw(JSON.stringify(error.json()) + '.Server error.'));
     }
 }

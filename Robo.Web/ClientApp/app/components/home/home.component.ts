@@ -26,7 +26,6 @@ export class HomeComponent {
     public SelectedContracaoEsquerdo: Contracao;
     public Mensagem: string = "";
     getRobo() {
-        console.log("getRobo()");
         this.roboService.getRobo().subscribe(res => {
             this.robo = Object.assign(new Robo(), res);
             this.SelectedInclinacao = this.robo.Cabeca.Inclinacao;
