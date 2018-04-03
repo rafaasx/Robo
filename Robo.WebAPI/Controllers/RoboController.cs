@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
@@ -17,11 +18,7 @@ namespace Robo.Web.Controllers
 
     public RoboController()
     {
-      string path = Environment.CurrentDirectory;
-      string roboJson = File.ReadAllText(@"C:\Projetos\Desafio Becomex\ROBO\Robo.WebAPI\robo.json");
-
-      _robo = new Domain.Robo();
-      _robo = JsonConvert.DeserializeObject<Domain.Robo>(roboJson);
+      _robo = CarregarRobo();     
     }
     // GET: api/Robo1
     public IHttpActionResult Get()
@@ -62,7 +59,7 @@ namespace Robo.Web.Controllers
           _robo.BracoDireito.Pulso.Rotacionar(rotacaoPulso);
         else
           _robo.BracoEsquerdo.Pulso.Rotacionar(rotacaoPulso);
-        SalvarJson();
+        SalvarJson(_robo);
         return Ok();
       }
       catch (Exception e)
@@ -76,7 +73,7 @@ namespace Robo.Web.Controllers
       try
       {
         _robo.Cabeca.Rotacionar(rotacaoCabeca);
-        SalvarJson();
+        SalvarJson(_robo);
         return Ok();
       }
       catch (Exception e)
@@ -94,7 +91,7 @@ namespace Robo.Web.Controllers
         else
           _robo.BracoEsquerdo.Cotovelo.Contrair(contracao);
 
-        SalvarJson();
+        SalvarJson(_robo);
         return Ok();
       }
       catch (Exception e)
@@ -108,7 +105,7 @@ namespace Robo.Web.Controllers
       try
       {
         _robo.Cabeca.Inclinar(inclinacao);
-        SalvarJson();
+        SalvarJson(_robo);
         return Ok();
       }
       catch (Exception e)
@@ -117,16 +114,47 @@ namespace Robo.Web.Controllers
       }
     }
 
-    private void SalvarJson()
+    private void SalvarJson(Domain.Robo robo)
     {
       TextWriter writer;
-      using (writer = new StreamWriter(@"C:\Projetos\Desafio Becomex\ROBO\Robo.WebAPI\robo.json", append: false))
+      using (writer = new StreamWriter(Path.Combine(HttpRuntime.AppDomainAppPath, "robo.json"), append: false))
       {
-        writer.WriteLine(JsonConvert.SerializeObject(_robo, new JsonSerializerSettings()
+        writer.WriteLine(JsonConvert.SerializeObject(robo, new JsonSerializerSettings()
         {
           ReferenceLoopHandling = ReferenceLoopHandling.Ignore
         }));
       }
+    }
+
+    private Domain.Robo CarregarRobo()
+    {
+      Domain.Robo robo = new Domain.Robo();
+      try
+      {
+        string jsonPath = Path.Combine(HttpRuntime.AppDomainAppPath, "robo.json");
+        string roboJson = string.Empty;
+        if (File.Exists(jsonPath))
+          roboJson = File.ReadAllText(jsonPath);
+        robo = new Domain.Robo();
+        if (!string.IsNullOrEmpty(roboJson))
+          robo = JsonConvert.DeserializeObject<Domain.Robo>(roboJson);
+        else
+        {
+          robo.Nome = "Eu Robo";
+          robo.Cabeca.Nome = "Cabeça";
+          robo.BracoDireito.Nome = "Braco Direito";
+          robo.BracoEsquerdo.Nome = "Braco Direito";
+          robo.BracoDireito.Lado = EnumLado.Direito;
+          robo.BracoEsquerdo.Lado = EnumLado.Esquerdo;
+          SalvarJson(robo);
+        }
+        return robo;
+      }
+      catch (Exception)
+      {
+        return robo;
+      }
+      
     }
   }
 }
