@@ -120,7 +120,7 @@ namespace Robo.Domain.Tests
       }
       catch (Exception e)
       {
-        Exception expected = new Exception("Progressão de inclinacao da cabeça inválida.");
+        Exception expected = new Exception("Progressão de inclinação da cabeça inválida.");
         Assert.AreEqual(expected.Message, e.Message);
 
       }

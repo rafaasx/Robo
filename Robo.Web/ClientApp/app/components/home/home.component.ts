@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RoboService } from '../service/robo.service';
 import { Robo } from '../dto/robo';
 import { Contracao, Inclinacao, Rotacao, Lado } from '../dto/enum'
+import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'home',
@@ -17,16 +18,16 @@ export class HomeComponent {
     public optionsInclinacao: string[];
     public optionsRotacao: string[];
     public optionsContracao: string[];
-    public SelectedInclinacao: number;
-    public SelectedRotacaoPulsoDireito: number;
-    public SelectedRotacaoPulsoEsquerdo: number;
-    public SelectedRotacaoCabeca: number;
-    public SelectedContracaoDireito: number;
-    public SelectedContracaoEsquerdo: number;
+    public SelectedInclinacao: Inclinacao;
+    public SelectedRotacaoPulsoDireito: Rotacao;
+    public SelectedRotacaoPulsoEsquerdo: Rotacao;
+    public SelectedRotacaoCabeca: Rotacao;
+    public SelectedContracaoDireito: Contracao;
+    public SelectedContracaoEsquerdo: Contracao;
+    public Mensagem: string = "";
     getRobo() {
-        console.log("getRobo:");
+        console.log("getRobo()");
         this.roboService.getRobo().subscribe(res => {
-            console.log("res: " + JSON.stringify(res));
             this.robo = Object.assign(new Robo(), res);
             this.SelectedInclinacao = this.robo.Cabeca.Inclinacao;
             this.SelectedRotacaoPulsoDireito = this.robo.BracoDireito.Pulso.Rotacao;
@@ -34,7 +35,6 @@ export class HomeComponent {
             this.SelectedRotacaoCabeca = this.robo.Cabeca.Rotacao;
             this.SelectedContracaoDireito = this.robo.BracoDireito.Cotovelo.Contracao;
             this.SelectedContracaoEsquerdo = this.robo.BracoEsquerdo.Cotovelo.Contracao;
-            console.log("this.robo: " + JSON.stringify(this.robo));
         });
     }
 
@@ -48,9 +48,35 @@ export class HomeComponent {
     }
 
     inclinarCabeca() {
-        this.roboService.inclinarCabeca(this.SelectedInclinacao).subscribe(res => {
-            console.log("res: " + JSON.stringify(res));
-        });
-        //getRobo();
+        this.Mensagem = "";
+        this.roboService.inclinarCabeca(this.SelectedInclinacao)
+            .catch((error: any) => this.Mensagem = JSON.parse(error._body).Message)
+            .finally(() => { this.getRobo();  })
+            .subscribe(res => this.getRobo(), error => JSON.stringify("error: " + error));
+    }
+
+    rotacionarCabeca() {
+        this.Mensagem = "";
+        this.roboService.rotacionarCabeca(this.SelectedRotacaoCabeca)
+            .catch((error: any) => this.Mensagem = JSON.parse(error._body).Message)
+            .finally(() => { this.getRobo(); })
+            .subscribe(res => this.getRobo(), error => JSON.stringify("error: " + error));
+    }
+
+
+    contrairCotovelo(selectedContrair: Contracao, lado: Lado) {
+        this.Mensagem = "";
+        this.roboService.contrairCotovelo(selectedContrair, lado)
+            .catch((error: any) => this.Mensagem = JSON.parse(error._body).Message)
+            .finally(() => { this.getRobo(); })
+            .subscribe(res => this.getRobo(), error => JSON.stringify("error: " + error));
+    }
+
+    rotacionarPulso(selectedRotacionar: Rotacao, lado: Lado) {
+        this.Mensagem = "";
+        this.roboService.rotacionarPulso(selectedRotacionar, lado)
+            .catch((error: any) => this.Mensagem = JSON.parse(error._body).Message)
+            .finally(() => { this.getRobo(); })
+            .subscribe(res => this.getRobo(), error => JSON.stringify("error: " + error));
     }
 }

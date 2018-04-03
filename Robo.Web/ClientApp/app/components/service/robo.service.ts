@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import { Robo } from '../dto/robo';
-import { Inclinacao, Lado, Rotacao } from '../dto/enum';
+import { Inclinacao, Lado, Rotacao, Contracao } from '../dto/enum';
 
 @Injectable()
 export class RoboService {
@@ -22,25 +22,21 @@ export class RoboService {
         console.log("inclinarCabeca: " + inclinacao);
         return this.http.post(this._apiURL + "?inclinacao=" + inclinacao, { "inclinacao": inclinacao })
             .map((res: Response) => res.json());
-            //.catch((error: any) => Observable.throw(JSON.stringify(error.json()) + '.Server error.'));
     }
 
     rotacionarCabeca(rotacao: Rotacao) {
         return this.http.post(this._apiURL + "?rotacaoCabeca=" + rotacao, {})
-            .map((res: Response) => res.json())
-            .catch((error: any) => Observable.throw(JSON.stringify(error.json()) + '.Server error.'));
+            .map((res: Response) => res.json());
     }
 
-    contrairCotovelo(inclinacao: Inclinacao, lado: Lado): Observable<any> {
-        return this.http.post(this._apiURL + "?inclinacao=" + inclinacao + "&lado=" + lado, {})
-            .map((res: Response) => res.json())
-            .catch((error: any) => Observable.throw(JSON.stringify(error.json()) + '.Server error.'));
+    contrairCotovelo(contracao: Contracao, lado: Lado): Observable<any> {
+        return this.http.post(this._apiURL + "?contracao=" + contracao + "&lado=" + lado, {})
+            .map((res: Response) => res.json());
     }
 
     rotacionarPulso(rotacao: Rotacao, lado: Lado): Observable<any> {
         return this.http.post(this._apiURL + "?rotacaoPulso=" + rotacao + "&lado=" + lado, {})
-            .map((res: Response) => res.json())
-            .catch((error: any) => Observable.throw(JSON.stringify(error.json()) + '.Server error.'));
+            .map((res: Response) => res.json());
     }
 
     constructor(private http: Http) { }

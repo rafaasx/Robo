@@ -24,7 +24,7 @@ namespace Robo.Domain
     private bool ValidarInclinacao(EnumInclinacao inclinacao)
     {
       if (Math.Abs(Inclinacao - inclinacao) != 1)
-        throw new Exception("Progressão de inclinacao da cabeça inválida.");
+        throw new Exception("Progressão de inclinação da cabeça inválida.");
       return true;
     }
 

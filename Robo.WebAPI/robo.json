@@ -1,1 +1,1 @@
-{"BracoDireito":{"Lado":2,"Cotovelo":{"Contracao":2},"Pulso":{"Rotacao":3},"Nome":"Braço Direito"},"BracoEsquerdo":{"Lado":1,"Cotovelo":{"Contracao":1},"Pulso":{"Rotacao":3},"Nome":"Braço Esquerdo"},"Cabeca":{"Nome":"Cabeça","Inclinacao":1,"Rotacao":3},"Nome":"Eu Robo"}
+{"BracoDireito":{"Lado":2,"Cotovelo":{"Contracao":4},"Pulso":{"Rotacao":3},"Nome":"Braço Direito"},"BracoEsquerdo":{"Lado":1,"Cotovelo":{"Contracao":3},"Pulso":{"Rotacao":2},"Nome":"Braço Esquerdo"},"Cabeca":{"Nome":"Cabeça","Inclinacao":2,"Rotacao":2},"Nome":"Eu Robo"}
